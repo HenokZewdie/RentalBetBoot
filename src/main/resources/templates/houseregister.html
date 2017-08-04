@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html     xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:th="http://www.thymeleaf.org"
+          xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="base::Mena">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Spring Security Example</title>
+
+</head>
+<body>
+<nav class="navbar navbar-default" th:replace="base::navi"></nav>
+<div class="container">
+    <div class="jumbotron">
+        <div class="container">
+            <br /><br /><br />
+            <h4 style="font-family: 'Sansation'; font-size: 24px; color: #006699"> Registrer Here</h4>
+            <form autocomplete="on" action="#"  th:action="@{/houseregister}" enctype="multipart/form-data" th:object="${house}" method="post">
+                    <span th:if="${#fields.hasErrors('street')}" th:errors="*{street}">street Error</span>
+                    <input type="text" name= "street" th:field="*{street}" class="form-control" id="street" placeholder="Street address" />
+                <div class="col-xs-4">
+                    <label for="city" style="font-family: 'Sansation'; font-size: 16px; color: #006699">City</label>
+                    <input type="text" th:field="*{city}" class="form-control" id="city" placeholder="City" />
+                </div>
+                <div class="col-xs-4">
+                    <label for="state" style="font-family: 'Sansation'; font-size: 16px; color: #006699">State</label>
+                    <input type="text" th:field="*{state}" class="form-control" id="state" placeholder="state" />
+                </div>
+                <div class="col-xs-4">
+                    <label for="zip" style="font-family: 'Sansation'; font-size: 16px; color: #006699">ZIP Code</label>
+                    <input type="text" th:field="*{zipCode}" class="form-control" id="zip" placeholder="ZIP Code" />
+                </div>
+                <div class="col-xs-4">
+                    <label for="type" style="font-family: 'Sansation'; font-size: 16px; color: #006699">Type</label>
+                    <input type="text" th:field="*{type}" class="form-control" id="type" placeholder="Apt, roommate, Basement" />
+                </div>
+                <div class="col-xs-4">
+                    <label for="bath" style="font-family: 'Sansation'; font-size: 16px; color: #006699">Bath</label>
+                    <input type="text" th:field="*{bath}" class="form-control" id="bath" placeholder="Individual, shared" />
+                </div>
+                <div class="col-xs-4">
+                    <label for="kitchen" style="font-family: 'Sansation'; font-size: 16px; color: #006699">Kitchen</label>
+                    <input type="text" th:field="*{kitchen}" class="form-control" id="kitchen" placeholder="Kitchen" />
+                </div>
+                <div class="col-xs-4">
+                    <label for="duration" style="font-family: 'Sansation'; font-size: 16px; color: #006699">Duration</label>
+                    <input type="text" th:field="*{duration}" class="form-control" id="duration" placeholder="3 month, unlimited" />
+                </div>
+                <div class="col-xs-4">
+                    <label for="price" style="font-family: 'Sansation'; font-size: 16px; color: #006699">price</label>
+                    <input type="text" th:field="*{price}" class="form-control" id="price" placeholder="price" />
+                </div>
+                <div class="col-xs-4">
+                    <label for="phone" style="font-family: 'Sansation'; font-size: 16px; color: #006699">phone</label>
+                    <input type="text" th:field="*{phone}" class="form-control" id="phone" placeholder="phone is optional" />
+                </div>
+                <div class="col-xs-4">
+                    <label for="remark" style="font-family: 'Sansation'; font-size: 16px; color: #006699">Description</label>
+                    <input type="text" th:field="*{remark}" class="form-control" id="remark" placeholder="Near to supermarket and good for transportation" />
+                </div>
+
+                <div class="col-xs-4">
+                    <label for="remark" style="font-family: 'Sansation'; font-size: 16px; color: #006699">Upload Image</label>
+                    <input type="file" name="file" />
+                </div>
+
+
+                <div class="col-md-2">
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button></div>
+
+            </form>
+            <div th:if="${message}">
+                <h2 th:text="${message}"/><br/><br/>
+            </div>
+            <div th:if="${imageurl} != null">
+                <img th:src="${imageurl}" />
+                <hr />
+                <div th:utext="${sizedimageurl}">
+
+                </div>
+            </div>
+
+        </div><!-- /.container -->
+        <th:block th:replace="base :: footlinks"></th:block>
+    </div></div>
+</body>
+</html>

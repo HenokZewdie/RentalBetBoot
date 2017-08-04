@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head th:replace="base::Mena">
+    <meta charset="utf-8" />
+</head>
+
+<body>
+<nav class="navbar navbar-default" th:replace="base::navi"></nav>
+<div class="jumbotron">
+    <div class="container">
+
+        <div class="col-md-3">
+            <div th:if="${param.error}">
+                Invalid username and password.
+            </div>
+            <div th:if="${param.logout}">
+                You have been logged out.
+            </div>
+            <form th:action="@{/login}" th:object="${user}" method="post">
+                <h2 class="form-signin-heading">Login</h2>
+                <label for="inputEmail" class="sr-only">Username</label>
+                <input type="text" name= "username" id="inputEmail" class="form-control" placeholder="Email address" />
+                <label for="inputPassword" class="sr-only">Password</label>
+                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" />
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="remember-me" /> Remember me
+                    </label>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            </form>
+        </div>
+    </div>
+</div> <!-- /container -->
+
+
+</body>
+</html>

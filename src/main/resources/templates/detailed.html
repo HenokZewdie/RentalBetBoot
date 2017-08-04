@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="www.thymeleaf.org">
+<head th:replace="base :: Mena">
+    <meta charset="UTF-8" />
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <div class="jumbotron">
+
+    <nav class="navbar navbar-default" th:replace="base::navi"> </nav>
+
+        <table class="table table-hover" >
+
+            <tr th:each="loopin : ${detailedList}">
+                <td th:utext = "${loopin.detailphoto}" th:border="1" />"></h5></td>
+                <td>
+
+                    <h6 style="font-family: 'Sansation'; font-size: 30px; color: #006699">Contact this Property</h6>
+                    <h6 style="font-family: 'Sansation'; font-size: 16px; color: #006699">Call or Email</h6>
+                    <h6 style="font-family: 'Sansation'; font-size: 16px; color: #006699"  th:text = "${loopin.phone}"></h6>
+                    <h6 style="font-family: 'Sansation'; font-size: 16px; color: #006699"  th:text = "${SessionName}"></h6>
+                    <h6 style="font-family: 'Sansation'; font-size: 16px; color: #006699">Message</h6>
+
+                    <form th:action="@{/messagesending}" th:object="${messagesender}" method="post">
+                    <textarea th:field="*{message}" rows="4" cols="50" placeholder="Hi, I found your listing on Rent.com and would like to schedule a visit. Thanks!"></textarea>
+                    <h6 style="font-family: 'Sansation'; font-size: 16px; color: #006699" placeholder="Your Full Name">From</h6>
+                    <input type="text" th:field="*{senderFullname}" size="50"/>
+                    <h6 style="font-family: 'Sansation'; font-size: 16px; color: #006699">Email</h6>
+                    <input type="text" th:field="*{senderEmail}" size="50"/>
+                    <h6 style="font-family: 'Sansation'; font-size: 16px; color: #006699">phone</h6>
+                    <input type="text" th:field="*{phone}" size="50"/>
+                    <button type="submit" class="btn btn-lg btn-primary">Send Email</button></a>
+                    </form>
+                </td>
+            </tr>
+
+            <tr th:each="loopin : ${detailedList}"><h6 style="font-family: 'Sansation'; font-size: 16px; color: black"  th:text = "${loopin.type}"></h6></tr>
+            <tr th:each="loopin : ${detailedList}">
+                <td>
+                    <h6 style="font-family: 'Sansation'; font-size: 16px; color: black"  th:text = "${loopin.street}" ></h6>
+                </td>   </tr>
+            <tr th:each="loopin : ${detailedList}">
+                <td>
+                    <h6 style="font-family: 'Sansation'; font-size: 16px; color: black"  th:text = "${loopin.city}"></h6>
+                    <h6 style="font-family: 'Sansation'; font-size: 16px; color: black"  th:text = "${loopin.state}"></h6>
+                    <h6 style="font-family: 'Sansation'; font-size: 16px; color: black"  th:text = "${loopin.zipCode}"></h6>
+                </td></tr>
+            <tr th:each="loopin : ${detailedList}">
+                <td style="font-family: 'Sansation'; font-size: 16px; color: black"  th:text = "${loopin.price}" ></td>
+
+            </tr>
+        </table>
+        <table class="table table-hover">
+            <tr><h4 style="font-family: 'Sansation'; font-size: 30px; color: #006699" align="center"> Suggested  Ads</h4></tr>
+
+            <tr th:each="loopin : ${suggestedList}">
+                <td th:utext = "${loopin.photo}" th:border="1" />"></h5></td>
+                <td><h6 style="font-family: 'Sansation'; font-size: 16px; color: black"  th:text = "${loopin.type}"></h6></td>
+                <td>
+                    <h6 style="font-family: 'Sansation'; font-size: 16px; color: black"  th:text = "${loopin.street}" ></h6>
+                    <h6 style="font-family: 'Sansation'; font-size: 16px; color: black"  th:text = "${loopin.city}"></h6>
+                    <h6 style="font-family: 'Sansation'; font-size: 16px; color: black"  th:text = "${loopin.state}"></h6>
+                    <h6 style="font-family: 'Sansation'; font-size: 16px; color: black"  th:text = "${loopin.zipCode}"></h6>
+                </td>
+
+                <td style="font-family: 'Sansation'; font-size: 16px; color: black"  th:text = "${loopin.price}" ></td>
+
+                <td>
+                    <a th:href="@{/detailed/{id} (id=${loopin.id})}">
+                        <button type="button" class="btn btn-primary" h5 style="font-family: 'Sansation'; font-size: 16px">Check Availability</button></a>
+                </td>
+                <!-- <td>
+                     <a th:href="@{email/{username}(username=${loopin.username})}">  <button type="button" class="btn btn-primary">Check Availability</button></a>
+                 </td>-->
+                <!--<td th:text = "${#dates.format(mylink.date, 'MMM-dd-yyyy')}"></td>  #dates.format(sprint.releaseDate, 'dd-MMM-yyyy')-->
+            </tr>
+
+        </table>
+        </div>
+    </div>
+</body>
+</html>

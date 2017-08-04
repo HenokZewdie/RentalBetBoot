@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html     xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:th="http://www.thymeleaf.org"
+          xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="base :: Mena">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Spring Security Example</title>
+
+</head>
+<body>
+<nav class="navbar navbar-default" th:replace="base::navi"></nav>
+<div class="container">
+    <div class="jumbotron">
+        <div class="container">
+    <br /><br /><br />
+    <h3 style="color:#006699" > Register Here</h3>
+            <div class="col-md-4">
+    <form autocomplete="off" action="#" th:action="@{/register}" th:object="${user}" method="post">
+
+            <span th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}">Full Name Error</span>
+            <input type="text" class="form-control" id="fullName" placeholder="Full Name" th:field="*{fullName}" />
+            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</span>
+            <input type="email" class="form-control" id="email" placeholder="Email" th:field="*{email}" />
+            <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</span>
+            <input type="text" class="form-control" id="username" placeholder="Username" th:field="*{username}" />
+            <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</span>
+            <input type="password" class="form-control" id="password" placeholder="Password" th:field="*{password}" />
+            <span th:if="${#fields.hasErrors('zipCode')}" th:errors="*{zipCode}">Password Error</span>
+            <input type="text" class="form-control" id="zipCode" placeholder="zipCode" th:field="*{zipCode}" />
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
+    </form></div>
+</div><!-- /.container -->
+<th:block th:replace="base :: footlinks"></th:block>
+    </div></div>
+</body>
+</html>

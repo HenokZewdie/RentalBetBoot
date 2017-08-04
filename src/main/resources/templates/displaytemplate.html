@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:position="http://www.w3.org/1999/xhtml" xmlns:z-index="http://www.w3.org/1999/xhtml">
+<head th:replace="base :: Mena">
+    <meta charset="UTF-8" />
+    <title>Title</title>
+
+</head>
+<body bgcolor="#87cefa">
+<div class="container">
+            <nav class="navbar navbar-default" th:replace="base::navi"> </nav>
+
+        <table class="table table-hover">
+
+            <tr th:each="loopin : ${houseList}">
+                <td th:utext = "${loopin.photo}" th:border="1" />"></h5></td>
+                <td><h6 style="font-family: 'Sansation'; font-size: 16px; color: black"  th:text = "${loopin.type}"></h6></td>
+                <td>
+                <h6 style="font-family: 'Sansation'; font-size: 16px; color: black"  th:text = "${loopin.street}" ></h6>
+                <h6 style="font-family: 'Sansation'; font-size: 16px; color: black"  th:text = "${loopin.city}"></h6>
+                <h6 style="font-family: 'Sansation'; font-size: 16px; color: black"  th:text = "${loopin.state}"></h6>
+                <h6 style="font-family: 'Sansation'; font-size: 16px; color: black"  th:text = "${loopin.zipCode}"></h6>
+                </td>
+
+                <td style="font-family: 'Sansation'; font-size: 16px; color: black"  th:text = "${loopin.price}" ></td>
+
+                <td>
+                <a th:href="@{/detailed/{id} (id=${loopin.id})}">
+                    <button type="button" class="btn btn-primary" h5 style="font-family: 'Sansation'; font-size: 16px">Check Availability</button></a>
+                </td>
+               <!-- <td>
+                    <a th:href="@{email/{username}(username=${loopin.username})}">  <button type="button" class="btn btn-primary">Check Availability</button></a>
+                </td>-->
+                    <!--<td th:text = "${#dates.format(mylink.date, 'MMM-dd-yyyy')}"></td>  #dates.format(sprint.releaseDate, 'dd-MMM-yyyy')-->
+            </tr>
+
+        </table>
+    <table>
+    <form th:action="@{/notification}" th:object="${notify}" method="post">
+           <td><h5 style="font-family: 'Sansation'; font-size: 16px; color: #006699">Email Address: </h5></td>
+           <div class="col-md-4">
+           <td><input type="text" th:field="*{email}" class="form-control" id="email"/></div></td>
+
+            <td> <h5 style="font-family: 'Sansation'; font-size: 16px; color: #006699">House Type: </h5> </td>
+
+            <td>    <input type="text" th:field="*{type}" class="form-control" id="type"/> <!--optional but it will send based on the user required house type (Apt, Rm, basement)-->
+            </td>
+
+        <td>
+         <button type="submit" class="btn btn-primary" h5 style="font-family: 'Sansation'; font-size: 16px">Notify Me</button></td> </tr>
+    </form>
+    </table>
+    <div class="panel-footer">Copyright protected for @rentbet 2017</div>
+    </div>
+
+</body>
+</html>
