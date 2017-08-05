@@ -30,6 +30,8 @@ public class HomeController {
     @Autowired
     private UserValidator userValidator;
     @Autowired
+    private HouseValidator houseValidator;
+    @Autowired
     private UserService userService;
     @Autowired
     private UserRepository userRepository;
@@ -82,8 +84,8 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/houseregister", method = RequestMethod.POST)
-    public String housePOST(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes,
-                            Model model, @ModelAttribute House house, Principal principal){
+    public String housePOST(@RequestParam("file") MultipartFile file, House house, RedirectAttributes redirectAttributes,
+                            Model model,  Principal principal, BindingResult result){
 
         if (file.isEmpty()){
             redirectAttributes.addFlashAttribute("message","Please select a file to upload");
@@ -114,14 +116,14 @@ public class HomeController {
          /*email a notification for everybody when the new house is registered using a forloop*/
         Iterable<Notification> notify= notificationRepository.findAll();
         for(Notification itrNotify: notify){
-            String message = "Hello Ekele, ".concat("/n").concat("New house has posted with the link below.") ; //we will add the actual URL for the new house
+            String message = "Hello Ekele, New house has posted with the link below." ; //we will add the actual URL for the new house
             try {
                 sendEmailWithoutTemplating(sessionUsername, fromSession, itrNotify.getEmail(), message);
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
         }
-        return "redirect:/houseregister";
+        return "redirect:/loginSuccess";
     }
 
     @RequestMapping(value = "/loginSuccess", method = RequestMethod.GET)

@@ -16,9 +16,12 @@
         <div class="container">
             <br /><br /><br />
             <h4 style="font-family: 'Sansation'; font-size: 24px; color: #006699"> Registrer Here</h4>
+
             <form autocomplete="on" action="#"  th:action="@{/houseregister}" enctype="multipart/form-data" th:object="${house}" method="post">
-                    <span th:if="${#fields.hasErrors('street')}" th:errors="*{street}">street Error</span>
+                <div class="col-xs-4">
+                    <label for="street" style="font-family: 'Sansation'; font-size: 16px; color: #006699">Street</label>
                     <input type="text" name= "street" th:field="*{street}" class="form-control" id="street" placeholder="Street address" />
+                </div>
                 <div class="col-xs-4">
                     <label for="city" style="font-family: 'Sansation'; font-size: 16px; color: #006699">City</label>
                     <input type="text" th:field="*{city}" class="form-control" id="city" placeholder="City" />

@@ -35,22 +35,6 @@
                     </form>
                 </td>
             </tr>
-
-            <tr th:each="loopin : ${detailedList}"><h6 style="font-family: 'Sansation'; font-size: 16px; color: black"  th:text = "${loopin.type}"></h6></tr>
-            <tr th:each="loopin : ${detailedList}">
-                <td>
-                    <h6 style="font-family: 'Sansation'; font-size: 16px; color: black"  th:text = "${loopin.street}" ></h6>
-                </td>   </tr>
-            <tr th:each="loopin : ${detailedList}">
-                <td>
-                    <h6 style="font-family: 'Sansation'; font-size: 16px; color: black"  th:text = "${loopin.city}"></h6>
-                    <h6 style="font-family: 'Sansation'; font-size: 16px; color: black"  th:text = "${loopin.state}"></h6>
-                    <h6 style="font-family: 'Sansation'; font-size: 16px; color: black"  th:text = "${loopin.zipCode}"></h6>
-                </td></tr>
-            <tr th:each="loopin : ${detailedList}">
-                <td style="font-family: 'Sansation'; font-size: 16px; color: black"  th:text = "${loopin.price}" ></td>
-
-            </tr>
         </table>
         <table class="table table-hover">
             <tr><h4 style="font-family: 'Sansation'; font-size: 30px; color: #006699" align="center"> Suggested  Ads</h4></tr>
