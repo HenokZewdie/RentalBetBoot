@@ -1,27 +1,26 @@
 package DebalFelagiPackage;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
+import com.cloudinary.utils.ObjectUtils;
+import com.google.common.collect.Lists;
+import it.ozimov.springboot.mail.model.defaultimpl.DefaultEmail;
+import it.ozimov.springboot.mail.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import com.cloudinary.utils.ObjectUtils;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.mail.internet.InternetAddress;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.text.ParseException;
+import java.util.*;
+
 //For Email Service
-import com.google.common.collect.Lists;
-import it.ozimov.springboot.mail.model.defaultimpl.DefaultEmail;
-import it.ozimov.springboot.mail.service.EmailService;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import javax.mail.internet.InternetAddress;
 
 
 @Controller
@@ -47,14 +46,28 @@ public class HomeController {
     String Sessionfullname, sessionUsername, fromSession, toSession, messageSession, stateSession;
 
     @RequestMapping("/")
-    public String index(Model model, House house)
+    public String index(Model model, House house, IpAddress ipAddress)
     {
         model.addAttribute("house",new House());
+        model.addAttribute("ipadd", new IpAddress());
         return "home";
     }
     @RequestMapping("/login")
     public String login(){
         return "login";
+    }
+
+    @RequestMapping(value = "/ipfinder", method = RequestMethod.GET)
+    public String finderGet(Model model){
+        model.addAttribute("ipadd", new IpAddress());
+        return "/ipfinder";
+    }
+
+    @RequestMapping(value = "/ipfinder", method = RequestMethod.POST)
+    public String finderPost(@ModelAttribute IpAddress ipAdd, Model model){
+        ipAdd.processIP(ipAdd.getIp());
+        System.out.println(ipAdd.getcName());
+        return "redirect:/";
     }
 
     @RequestMapping(value="/register", method = RequestMethod.GET)
@@ -133,7 +146,7 @@ public class HomeController {
         user = userRepository.findByUsername(principal.getName());
         long min = user.getZipCode() - 50;
         long max = user.getZipCode() + 50;
-        List<House> zipList = new ArrayList<>();
+        Set<House> zipList = new HashSet<>();
         for (long i = min; i<=max; i++){
             List<House> houseList = houseRepository.findByZipCode(i);
             zipList.addAll(houseList);
@@ -149,7 +162,31 @@ public class HomeController {
         return "/searchstate";
     }
     @RequestMapping(value = "/searchstate", method = RequestMethod.POST)
-    public String searchstate(Model model,  House house){
+    public String searchstate(Model model,  House house) throws Exception{
+        model.addAttribute("messagesend", new MessageSend());
+        model.addAttribute("notify", new Notification());
+        stateSession = house.getState();
+        List<House> zipList = houseRepository.findByState(stateSession);
+        if(zipList.isEmpty()) {
+            zipList = houseRepository.findByCity(stateSession);
+            if (zipList.isEmpty()) {
+                try{
+                    long zipTemp = Long.parseLong(stateSession);
+                    zipList = houseRepository.findByZipCode(zipTemp);
+                }catch (Exception e){
+                    return "redirect:/";
+                }
+            }
+        }
+
+          model.addAttribute("houseList", zipList);
+        return "/displaytemplate";
+    }
+
+   /* @RequestMapping(value = "/searchstate", method = RequestMethod.POST)
+    public HouseResponse searchstate(Model model,  House house){
+        HouseResponse houseresp = new HouseResponse();
+
         model.addAttribute("messagesend", new MessageSend());
         model.addAttribute("notify", new Notification());
         stateSession = house.getState();
@@ -161,8 +198,10 @@ public class HomeController {
             }
         }
         model.addAttribute("houseList", zipList);
-        return "/displaytemplate";
-    }
+
+        houseresp.add(zipList);
+        return houseresp;
+    }*/
 
     @RequestMapping(value = "/searchzip", method = RequestMethod.GET)
     public String searchzipGet(Model model){

@@ -1,5 +1,6 @@
 package DebalFelagiPackage;
 
+import DebalFelagiPackage.Role;
 import org.springframework.data.repository.CrudRepository;
 
 /**

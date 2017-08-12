@@ -30,6 +30,10 @@
                 <button class="btn btn-primary" style="font-family: 'Sansation'; font-size: 20px">SEARCH</button></td></form></tr></div>
 
 </table>
+    <form th:action="@{/ipfinder}" th:object="${ipadd}" method="post">
+        <input type="text" th:field="*{ip}"/>
+        <button type="submit" class="btn btn-primary">Get Country</button>
+    </form>
 </div>
 </body>
 </html>

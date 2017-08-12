@@ -1,5 +1,7 @@
 package DebalFelagiPackage;
 
+import DebalFelagiPackage.HouseRepository;
+import DebalFelagiPackage.House;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
