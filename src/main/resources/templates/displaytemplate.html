@@ -18,18 +18,18 @@
                 <td th:utext = "${loopin.photo}" th:border="1" />"></h5></td>
                 <td><h6 style="font-family: 'Sansation'; font-size: 16px; color: black"  th:text = "${loopin.type}"></h6></td>
                 <td>
-                <h6 style="font-family: 'Sansation'; font-size: 16px; color: black"  th:text = "${loopin.street}" ></h6>
-                <h6 style="font-family: 'Sansation'; font-size: 16px; color: black"  th:text = "${loopin.city}"></h6>
-                <h6 style="font-family: 'Sansation'; font-size: 16px; color: black"  th:text = "${loopin.state}"></h6>
-                <h6 style="font-family: 'Sansation'; font-size: 16px; color: black"  th:text = "${loopin.zipCode}"></h6>
+                <h6 style="font-family: 'Sansation'; font-size: 16px; color: black"  th:text = "${loopin.street} + ',   ' + ${loopin.city}" ></h6>
+                <h6 style="font-family: 'Sansation'; font-size: 16px; color: black"  th:text = "${loopin.state} + ',   ' + ${loopin.zipCode}"></h6>
                 </td>
 
-                <td style="font-family: 'Sansation'; font-size: 16px; color: black"  th:text = "${loopin.price}" ></td>
+                <td style="font-family: 'Sansation'; font-size: 16px; color: black"  th:text = "${loopin.price} +'$'" ></td>
 
                 <td>
                 <a th:href="@{/detailed/{id} (id=${loopin.id})}">
                     <button type="button" class="btn btn-primary" h5 style="font-family: 'Sansation'; font-size: 16px">Check Availability</button></a>
                 </td>
+                <td><a th:href="'http://maps.google.com/?q=term' + '/' + ${loopin.street} + '/' + ${loopin.city}
+                                +'/' + ${loopin.state} + '/' +${loopin.zipCode}" target="_blank">Google Map</a></td>
                <!-- <td>
                     <a th:href="@{email/{username}(username=${loopin.username})}">  <button type="button" class="btn btn-primary">Check Availability</button></a>
                 </td>-->

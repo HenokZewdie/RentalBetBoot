@@ -11,13 +11,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import javax.mail.internet.InternetAddress;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.Principal;
-import java.text.ParseException;
 import java.util.*;
 
 //For Email Service
@@ -28,8 +26,6 @@ public class HomeController {
 
     @Autowired
     private UserValidator userValidator;
-    @Autowired
-    private HouseValidator houseValidator;
     @Autowired
     private UserService userService;
     @Autowired

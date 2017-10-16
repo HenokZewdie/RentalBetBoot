@@ -43,13 +43,11 @@
                 <td th:utext = "${loopin.photo}" th:border="1" />"></h5></td>
                 <td><h6 style="font-family: 'Sansation'; font-size: 16px; color: black"  th:text = "${loopin.type}"></h6></td>
                 <td>
-                    <h6 style="font-family: 'Sansation'; font-size: 16px; color: black"  th:text = "${loopin.street}" ></h6>
-                    <h6 style="font-family: 'Sansation'; font-size: 16px; color: black"  th:text = "${loopin.city}"></h6>
-                    <h6 style="font-family: 'Sansation'; font-size: 16px; color: black"  th:text = "${loopin.state}"></h6>
-                    <h6 style="font-family: 'Sansation'; font-size: 16px; color: black"  th:text = "${loopin.zipCode}"></h6>
+                    <h6 style="font-family: 'Sansation'; font-size: 16px; color: black"  th:text = "${loopin.street} + ',   ' + ${loopin.city}" ></h6>
+                    <h6 style="font-family: 'Sansation'; font-size: 16px; color: black"  th:text = "${loopin.state} + ',   ' + ${loopin.zipCode}"></h6>
                 </td>
 
-                <td style="font-family: 'Sansation'; font-size: 16px; color: black"  th:text = "${loopin.price}" ></td>
+                <td style="font-family: 'Sansation'; font-size: 16px; color: black"  th:text = "${loopin.price} + '$'" ></td>
 
                 <td>
                     <a th:href="@{/detailed/{id} (id=${loopin.id})}">

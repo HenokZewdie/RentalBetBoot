@@ -13,7 +13,8 @@ public class Role {
     @Column(unique=true)
     private String role;
 
-    @ManyToMany(mappedBy = "roles",fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY) //mappedBy = "roles" is used to prevent creating another table (role_user)
+                                                          // in the database for its relationship to the user (user_role)
     private Collection<User> users;
 
     public Role(String role) {
